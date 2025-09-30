@@ -2,6 +2,7 @@
 
 using namespace std;
 
+encrip_xor(char texto, int tamaño);
 int main()
 {
 
