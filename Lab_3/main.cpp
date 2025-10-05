@@ -1,8 +1,11 @@
 #include <iostream>
-
+#include <fstream>
 using namespace std;
 
-encrip_xor(char texto, int tamaño);
+
+char* leerArchivo_Original(const char* nombre);
+char* encrip_xor(char *texto, int tamaño ,int clave);
+
 int main()
 {
 
@@ -41,7 +44,26 @@ int main()
 
 
 
+char* leerArchivo_Original(const char* nombre) {
+    ifstream archivo(nombre, ios::binary); // modo binario para preservar todo
+    if (!archivo.is_open()) {
+        cerr << "Error: No se pudo abrir el archivo '" << nombre << "'\n";
+        return nullptr;
+    }
 
+    // Ir al final para saber el tamaño
+    archivo.seekg(0, ios::end);
+    streampos tam = archivo.tellg();
+    archivo.seekg(0, ios::beg);
+
+    // Reservar memoria exacta (+1 para '\0' si quieres tratarlo como cadena)
+    char* buffer = new char[tam + 1];
+    archivo.read(buffer, tam);
+    buffer[tam] = '\0'; // opcional: solo si vas a usarlo como cadena C
+
+    archivo.close();
+    return buffer; // ¡Recuerda liberar con delete[]!
+}
 
 
 
