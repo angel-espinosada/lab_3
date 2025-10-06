@@ -5,6 +5,7 @@ using namespace std;
 
 char* leerArchivo_Original(const char* nombre);
 char* encrip_xor(char *texto, int tamaño ,int clave);
+char* texto_Binario(const char* texto, long tam);
 
 int main()
 {
@@ -24,15 +25,24 @@ int main()
 
             case 1:{
 
-                char* contenido = leerArchivo_Original("ejemplo.txt");
-                if (contenido == nullptr) {
-                    cout << "No se pudo abrir 'ejemplo.txt'\n";
-                } else {
-                    cout << "Contenido del archivo:\n";
-                    cout << contenido << endl;  // imprime tal como está
-                    delete[] contenido;         // liberar memoria
+                char* buffer = leerArchivo_Original("ejemplo.txt");
+                if (buffer == nullptr) {
+                    cout << "No se pudo leer el archivo.\n";
+                    break;
                 }
 
+                // Calcular tamaño (como 'long')
+                long tam = 0;
+                while (buffer[tam] != '\0') {
+                    tam++;
+                }
+
+                char* binario = texto_Binario(buffer, tam);
+                cout << "Binario:\n" << binario << "\n";
+
+                delete[] buffer;
+                delete[] binario;
+                break;
             }
 
                 break;
@@ -75,7 +85,26 @@ char* leerArchivo_Original(const char* nombre) {
 }
 
 
+char* texto_Binario(const char* texto, long tam) {
+    if (tam <= 0) {
+        char* vacio = new char[1];
+        vacio[0] = '\0';
+        return vacio;
+    }
 
+    long tamBin = tam * 8;
+    char* binario = new char[tamBin + 1];
+    int pos = 0;
+
+    for (long i = 0; i < tam; i++) {
+        unsigned char c = static_cast<unsigned char>(texto[i]);
+        for (int bit = 7; bit >= 0; bit--) {
+            binario[pos++] = ((c >> bit) & 1) ? '1' : '0';
+        }
+    }
+    binario[pos] = '\0';
+    return binario;
+}
 
 
 
