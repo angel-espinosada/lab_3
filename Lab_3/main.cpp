@@ -24,8 +24,17 @@ int main()
 
             case 1:{
 
+                char* contenido = leerArchivo_Original("ejemplo.txt");
+                if (contenido == nullptr) {
+                    cout << "No se pudo abrir 'ejemplo.txt'\n";
+                } else {
+                    cout << "Contenido del archivo:\n";
+                    cout << contenido << endl;  // imprime tal como está
+                    delete[] contenido;         // liberar memoria
+                }
+
             }
-            break;
+
                 break;
             default:{
 
@@ -56,13 +65,13 @@ char* leerArchivo_Original(const char* nombre) {
     streampos tam = archivo.tellg();
     archivo.seekg(0, ios::beg);
 
-    // Reservar memoria exacta (+1 para '\0' si quieres tratarlo como cadena)
+    // Reservar memoria exacta
     char* buffer = new char[tam + 1];
     archivo.read(buffer, tam);
-    buffer[tam] = '\0'; // opcional: solo si vas a usarlo como cadena C
+    buffer[tam] = '\0';
 
     archivo.close();
-    return buffer; // ¡Recuerda liberar con delete[]!
+    return buffer;
 }
 
 
