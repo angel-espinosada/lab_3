@@ -25,12 +25,6 @@ int main()
             switch (opcion) {
 
             case 1:{
-                string arch_user;
-                int semilla;
-                cout<<"Ingrese el nombre del archivo a codificar"<<endl;
-                cin>>arch_user;
-                cout<<"Con que se semilla quieres codidifcar"<<endl;
-                cin>>semilla;
 
                 char* buffer = leerArchivo_Original("ejemplo.txt");
                 if (buffer == nullptr) {
@@ -52,7 +46,7 @@ int main()
                 break;
             }
 
-                break;
+            break;
             default:{
 
                 if(opcion!=0)
@@ -62,34 +56,26 @@ int main()
             }
         }
     }
-        cout << "Hello World!" << endl;
+    cout << "Hello World!" << endl;
 
-        return 0;
+    return 0;
 }
 
 
 
 
 char* leerArchivo_Original(const char* nombre) {
-    ifstream archivo(nombre, ios::binary);
+    ifstream archivo(nombre, ios::binary); // modo binario para preservar todo
     if (!archivo.is_open()) {
         cerr << "Error: No se pudo abrir el archivo '" << nombre << "'\n";
         return nullptr;
     }
+
     // Ir al final para saber el tamaño
     archivo.seekg(0, ios::end);
     streampos tam = archivo.tellg();
     archivo.seekg(0, ios::beg);
 
-<<<<<<< HEAD
-    // Reservar memoria dinamica
-    char* tex_temp = new char[tam + 1];
-    archivo.read(tex_temp, tam);
-    tex_temp[tam] ='\0';
-
-    archivo.close();
-    return tex_temp;
-=======
     // Reservar memoria exacta
     char* buffer = new char[tam + 1];
     archivo.read(buffer, tam);
@@ -199,27 +185,7 @@ char* codificarMetodo1(const char* binario, long tamBin, int n) {
     codificado[tamAjustado] = '\0';
     delete[] binAjustado;
     return codificado;
->>>>>>> 2d8193c367822588f89760026104d36b0479ae3a
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
