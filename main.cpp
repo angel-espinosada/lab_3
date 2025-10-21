@@ -1,4 +1,5 @@
 #include <iostream>
+<<<<<<< HEAD
 #include <fstream>
 using namespace std;
 
@@ -390,3 +391,13 @@ char* leerArchivoBinarioComoBinario(const char* nombre, long& tamBits) {
     delete[] buffer;
     return binario;
 }
+=======
+
+using namespace std;
+
+int main()
+{
+    cout << "Hello World!" << endl;
+    return 0;
+}
+>>>>>>> 8553365aa507231110145056fefa680ad5f7805b
