@@ -7,7 +7,9 @@ float sumar(float saldo, float consignacion);
 float restar(float saldo, float retiro);
 
 string leerArchivo(const string& nombre);
+
 void guardarArchivo(const string& nombre, const string& contenido);
+
 string codificar(const string& texto);
 string decodificar(const string& texto);
 int main() {
@@ -47,11 +49,15 @@ int main() {
                 float consignar;
                 float retirar;
                 string clave;
+                string archivoEntrada;
+
 
                 cout<<"::Cajero::"<<endl;
                 plata=100000;
                 string pista="ala";
+
                 int identificacion1=12345;
+
                 cout<<"Ingrese su cedula"<<endl;
                 cin>>identificacion;
                 cout<<"Ingrese la clave"<<endl;
@@ -163,7 +169,7 @@ void guardarArchivo(const string& nombre, const string& contenido) {
     archivo.close();
 }
 
-// Codifica invirtiendo los bits (sencillo)
+// Codifica invirtiendo los bits
 string codificar(const string& texto) {
     string resultado = texto;
     for (char& c : resultado)
