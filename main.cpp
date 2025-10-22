@@ -5,11 +5,8 @@ using namespace std;
 
 float sumar(float saldo, float consignacion);
 float restar(float saldo, float retiro);
-
 string leerArchivo(const string& nombre);
-
 void guardarArchivo(const string& nombre, const string& contenido);
-
 string codificar(const string& texto);
 string decodificar(const string& texto);
 int main() {
@@ -29,7 +26,6 @@ int main() {
 
             case 1:{
 
-
             }
 
             case 2:{
@@ -41,8 +37,6 @@ int main() {
 
             break;
 
-
-
             case 3:{
                 int identificacion;
                 float plata, resul;
@@ -50,7 +44,6 @@ int main() {
                 float retirar;
                 string clave;
                 string archivoEntrada;
-
 
                 cout<<"::Cajero::"<<endl;
                 plata=100000;
