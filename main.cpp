@@ -7,12 +7,19 @@ using namespace std;
 
 float sumar(float saldo, float consignacion);
 float restar(float saldo, float retiro);
+
 string textoABinario(string texto);
 string charABinario(char c);
 string binarioATexto(string binario);
 char binarioAChar(string binario8bits);
 string archivoABinario(string& nombreArchivo);
 string encriptarMetodo2(string binario, int n);
+
+
+string leerArchivo(const string& nombre);
+void guardarArchivo(const string& nombre, const string& contenido);
+string codificar(const string& texto);
+string decodificar(const string& texto);
 
 int main() {
 
@@ -49,6 +56,7 @@ int main() {
                     break;
                 }
 
+<<<<<<< HEAD
                 // Calcular tamaño (como 'long')
                 long tam = 0;
                 while (buffer[tam] != '\0') {
@@ -70,12 +78,10 @@ int main() {
 
                 cout<<"Desencriptar"<<endl;
 
-
+//hola
             }
 
             break;
-
-
 
             case 3:{
                 int identificacion;
@@ -84,7 +90,6 @@ int main() {
                 float retirar;
                 string clave;
                 string archivoEntrada;
-
 
                 cout<<"::Cajero::"<<endl;
                 plata=100000;
@@ -191,6 +196,7 @@ string leerArchivo(const string& nombre) {
     archivo.close();
     return contenido;
 }
+
 
 // Guarda texto en un archivo
 void guardarArchivo(const string& nombre, const string& contenido) {
