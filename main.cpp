@@ -11,6 +11,8 @@ string binarioATexto(string binario);
 char binarioAChar(string binario8bits);
 string archivoABinario(string& nombreArchivo);
 string encriptarMetodo2(string binario, int n);
+string guardar_codifi(string code);
+
 int main() {
 
     {
@@ -31,6 +33,7 @@ int main() {
                 string contenido;
                 string result;
                 string textresul;
+                string resultado2;
                 cout<<"Ingrese el nombre del archivo"<<endl;
                 cin>>nombreArchivo;
                 contenido=archivoABinario(nombreArchivo);
@@ -38,7 +41,8 @@ int main() {
                 cout<<"Binario"<<result<<endl;
                textresul=binarioATexto(contenido);
                 cout<<"Texto comvertido de nuevo"<<textresul<<endl;
-               encriptarMetodo2(contenido,4);
+               resultado2=encriptarMetodo2(contenido,4);
+                cout<<resultado2<<endl;
                 /*
                 char* buffer = leerArchivo_Original("ejemplo.txt");
                 if (buffer == nullptr) {
@@ -65,7 +69,7 @@ int main() {
 
                 cout<<"Desencriptar"<<endl;
 
-                //hola
+
             }
 
             break;
@@ -115,11 +119,8 @@ int main() {
                         case 1:{
                             cout<<"Su saldo es:"<<plata<<endl;
 
-
                         }
-
                         break;
-
                         case 2:
                         {
                             cout<<"Cuanto deseas retirar: "<<endl;
@@ -213,13 +214,9 @@ string binarioATexto(string binario) {
 
 
     for (int i = 0; i < binario.length(); i += 8) {
-
         string bloque8 = binario.substr(i, 8);
-
-
         texto += binarioAChar(bloque8);
     }
-
     return texto;
 }
 
@@ -238,11 +235,8 @@ char binarioAChar(string binario8bits) {
     return (char)valor;
 }
 string archivoABinario(string& nombreArchivo) {
-
     string temArchivo=nombreArchivo;
     ifstream archivo(nombreArchivo);
-
-
     if (!archivo.is_open()) {
         cout << "ERROR: No se pudo abrir el archivo '" << nombreArchivo << "'" << endl;
         return "";
@@ -272,24 +266,16 @@ string archivoABinario(string& nombreArchivo) {
 //Funciones para encriptar y desencriptar
 string encriptarBloque(string bloque) {
     int n = bloque.length();
-
     if (n <= 1) {
         return bloque;
     }
-
     string encriptado = "";
-
-
     encriptado += bloque[n - 1];
-
-
     for (int i = 0; i < n - 1; i++) {
         encriptado += bloque[i];
     }
-
     return encriptado;
 }
-
 
 string desencriptarBloque(string bloque) {
     int n = bloque.length();
@@ -297,49 +283,32 @@ string desencriptarBloque(string bloque) {
     if (n <= 1) {
         return bloque;
     }
-
     string desencriptado = "";
-
-
     for (int i = 1; i < n; i++) {
         desencriptado += bloque[i];
     }
-
-
     desencriptado += bloque[0];
-
     return desencriptado;
 }
 
 
 string encriptarMetodo2(string binario, int n) {
-
-
     if (n <= 0) {
         cout << "ERROR: n debe ser mayor que 0" << endl;
         return binario;
     }
-
     string resultado = "";
     int longitud = binario.length();
-
-
     for (int i = 0; i < longitud; i += n) {
-
         string bloque = "";
-
         for (int j = i; j < i + n && j < longitud; j++) {
             bloque += binario[j];
         }
-
-
         string bloqueEncriptado = encriptarBloque(bloque);
-
-
         resultado += bloqueEncriptado;
     }
-
     return resultado;
+
 }
 
 
@@ -352,23 +321,29 @@ string desencriptarMetodo2(string binarioEncriptado, int n) {
 
     string resultado = "";
     int longitud = binarioEncriptado.length();
-
     for (int i = 0; i < longitud; i += n) {
-
         string bloque = "";
-
         for (int j = i; j < i + n && j < longitud; j++) {
             bloque += binarioEncriptado[j];
         }
-
-
         string bloqueDesencriptado = desencriptarBloque(bloque);
-
-
         resultado += bloqueDesencriptado;
     }
-
     return resultado;
+}
+
+string guardar_codifi(string code){
+    string nombre_salidabin="codeficado.txt";
+    ofstream archivo(nombre_salidabin);
+    if(!archivo.is_open()){
+        cout<<"ERROR: No se pudo crear."<<endl;
+        return"";
+        archivo<<code;
+        archivo.close();
+        cout<<"Archivo codificado guardado: "<<nombre_salidabin<<endl;
+        return nombre_salidabin;
+
+    }
 }
 
 
